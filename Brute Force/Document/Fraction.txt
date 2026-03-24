@@ -1,0 +1,14 @@
+INPUT:
+Phân Số Tối Giản a/b.
+Phân Số Tối Giản c/d.
+
+Ràng Buộc:
+0 < a < b <= 10^5
+0 < c < d <= 10^5
+
+OUTPUT:
+Số Cách Biến Đổi Từ a/b -> c/d. Trong đó mỗi lần biến đổi a + 1 và b + 1.
+
+(1) Triển Khai Thuật Toán Theo Phương Pháp Vét Cạn (Brute Force):
++ Ở Mỗi Bước Thực Hiện + 1 Cho a, b Và Giản Ước, Nếu Phân Số (a * d == b * c), Trả Về Số Bước Kết Quả.
++ Nếu (a / b > c / d) hay (a * d > b * c) Ngay Trong Vòng Lặp: Tức Không Thể Biến Đổi => Ta Trả Về 0.

@@ -1,0 +1,38 @@
+INPUT:
+t: Số Lượng Test Case.
+k: Số Hạt Trám Được Thu Thập.
+
+OUTPUT: 
+m: Số Đường Cách Đều Nhau // Với Chiều Dài Của HCN.
+n: Số Đường Cách Đều Nhau // Với Chiều Rộng Của HCN.
+
+Ràng Buộc:
+t <= 20 (Số Test Case)
+1 <= m <= n
+k <= 10^12
+n - m nhỏ nhất có thể
+
+(1) Thiết Kế Thuật Toán Bằng Phương Pháp Brute Force (Vét Cạn):
++ Ta Nhận Ra Diện Tích Hình Chữ Nhật = (m + 1) * (n + 1) qua ví dụ EXAMPLE.
++ Số Ô Cắt Nhau Giữa Hai Đường Chéo m, n = (m * n)
+=> Bài Toán Quy Về Giải Phương Trình:
+(m + 1) * (n + 1) + (m * n) = 2 * k với nghiệm m, n >= 1 và k cho trước.
+<=> 2mn + (m + n + 1) = 2 * k
++ Ta biến đổi từ Tổng + Tổng = Kết Quả => Tích * Tích = Kết Quả
++ Ta Biến Đổi Và Trình Bày Thuật Toán Như Sau:
+(1) Nhân 2 Cho Cả Hai Vế => 4mn + 2m + 2n + 2 = 4k => 4mn + 2m + 2n + 1 + 1 = 4k
+=> (2m + 1) * (2n + 1) = 4k - 1
+Ta Đặt a = 2m + 1 => m = (a - 1) // 2
+Ta Đặt b = 2n + 1 => n = (b - 1) // 2
+(2) Bài Toán Trở Thành Tìm Cặp Ước (a, b) Có Hiệu Nhỏ Nhất.
+(3) Ta Đặt N = 4k - 1, Lúc Này N Luôn Là Số Lẻ. Muốn Tìm Cặp Ước Của Một Số Lẻ Thì (a, b) Cũng Phải Là Số Lẻ.
+(4) Khi Cài Đặt Tìm Cặp Ước Của Một Số, Ta Đã Được Học Ở NMLT Là Chỉ Dùng Vòng Lặp (Vét Cạn) Tới Căn N.
+(5) Ở Đây Căn N Có Thể Là Một Số Chẵn, Để Đảm Bảo Tìm Được Cặp Nghiệm Lẻ, Ta Luôn Phải Đảm Bảo Căn N Là 1 Số Lẻ.
+(6) Cặp Ước (a, b) Có Hiệu Nhỏ Nhất Xảy Ra Khi Và Chỉ Khi a Gần Với Căn N Nhất, Tức Lúc Này Ta Sẽ Duyệt Ngược Từ Căn N -> Số Lẻ Cuối Cùng Là 3.
+(6 +) Bổ Đề: 
+Ta Có Thể Thấy a Tương Ứng Với m và b Tương Ứng Với n. Tức a <= b. Vậy Nếu a Càng Nhỏ, Khi Tìm Ước b Còn Lại Thì b Sẽ Càng Lớn Và Hiệu b - a Sẽ Rất Lớn.
+Nên Ta Phải Tìm a Lớn Nhất Có Thể, Khi Đó b Sẽ Nhỏ Nhất Và b - a Sẽ Luôn Là Cặp Nghiệm Thỏa Mãn Yêu Cầu.
+Đây Cũng Là Lí Do Ta Duyệt Ngược Từ Căn N Để Tìm a Lớn Nhất.
+(7) Bỏ Cặp (a, b) Nếu a hoặc b = 1 Do Sẽ Vi Phạm Ràng Buộc n, m >= 1.
+(8) Khi Duyệt Ngược, Nếu Gặp Cặp Nghiệm a, b và m, n Thỏa Mãn => Trả Về Ngay Lập Tức Vì Nó Là Cặp Nghiệm Có Hiệu Nhỏ Nhất.
+(9) Nếu Không Thể Tìm Được Cặp Nghiệm Trong Vòng Lặp, Bài Toán Vô Nghiệm Và Trả Về m, n = -1.

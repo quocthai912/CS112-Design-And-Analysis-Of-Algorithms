@@ -1,0 +1,52 @@
+INPUT:
+a: Số cây đội I hạ được mỗi ngày.
+k: Ngày nghỉ của đội a (k, 2k, 3k, 4k).
+b: Số cây đội II hạ được mỗi ngày.
+m: Ngày nghỉ của đội b (m, 2m, 3m, 4m).
+n: Số cây xanh cần phải chặt.
+
+Ràng Buộc:
+1 <= a, b <= 10^9
+2 <= k, m <= 10^18
+1 <= n <= 10^18
+
+OUTPUT: 
+days: số ngày chặt hết cây.
+
+
+(1) Thuật toán thiết kế theo Brute Force:
+
+Số Cây Chặt Được = 0
+Ngày = 0
+
+while Số Cây Chặt Được < n:
+if Ngày % k != 0:
+Số Cây Chặt Được += a
+if Ngày % m != 0:
+Số Cây Chặt Được += b
+if Số Cây Chặt Được >= n:
+Break
+Ngày += 1
+
+in Ngày => Số Ngày Được Dùng Để Chặt n cây
+
+(2) Thuật Toán Sử Dụng Chặt Nhị Phân (Binary Search):
+
+Cho left = 1 (Ngày Đầu Tiên)
+Cho right = n (Ngày Tối Đa Có Thể Chặt Hết Số Cây)
+Vì Số Cây Có Thể Chặt Được Của 2 Đội Luôn >= 1, Tối Đa Số Ngày Cũng Chỉ = n
+
+while left <= right:
+mid = (left + right) // 2 # Ở Đây Mid Được Xem Là Số Ngày
+Số Cây = Được Tính Bằng Hàm Tính Số Cây Được Xây Dựng Riêng. Hàm Sẽ Trả Về Số Cây Chặt Được Của 2 Đội Trong Mid Ngày.
+
+if Số Cây >= n:
+# Số Cây Chặt Được Đã Vượt Qua Yêu Cầu Nên Ta Lưu Kết Quả Trước
+result = mid
+# Tìm Xem Liệu Có Thể Hoàn Thành Sớm Hơn Không
+right = mid - 1
+else:
+# Số Cây Chặt Được Không Đủ, Tăng Số Ngày Lên
+left = mid + 1
+
+In Result, Chính Là Số Ngày Chính Xác Để Có Thể Chặt n Cây.

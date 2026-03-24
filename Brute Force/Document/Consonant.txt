@@ -1,0 +1,35 @@
+INPUT:
++ Xâu kí tự s.
+
+OUTPUT:
++ Xâu kí tự s đã được biến đổi sau cho đối tính phụ âm là lớn nhất.
+
+RÀNG BUỘC:
++ Độ dài chuỗi s <= 10^6.
++ Trong chuỗi kết quả, không có kí tự nào vừa là chữ hoa vừa là chữ thường, tức là chúng chỉ được xuất hiện 1 dạng duy nhất là hoa hoặc thường trong toàn bộ xâu.
++ Đối tính phụ âm được tính = các cặp kí tự liền kề nhau đều là phụ âm và phải khác nhau về dạng hoa thường, tức là 1 cặp phụ âm là "pK" thì mới được tính là 1 đối tính phụ âm.
++ Nguyên âm bao gồm 7 chữ cái: a,e,o,u,i,w,y. Còn lại là phụ âm.
++ Xâu kí tự chỉ bao gồm 26 chữ cái La-tinh.
+
+THUẬT TOÁN:
+(1) Sử dụng Brute Force (Vét Cạn) kết hợp với chuỗi bit để sinh chuỗi.
+(2) Ý Tưởng được trình bày như sau:
++ Có tối đa 19 phụ âm, với mỗi phụ âm chỉ có hai trạng thái là hoa hoặc thường.
++ Ta mặc định 7 nguyên âm đều là chữ thường vì nó không ảnh hưởng tới đối tính phụ âm.
++ Nếu trong một chuỗi có đầy đủ 19 phụ âm với mỗi phụ âm có thể có hai trạng thái, ta sẽ sinh ra được tổng cộng: 2 * 2 * ... 2 = 2^19 chuỗi.
++ Vì vậy, ta nhận ra được nếu một chuỗi có k phụ âm thì sẽ sinh ra tổng cộng 2^k chuỗi.
++ Ý tưởng vét cạn của bài này chính là quét 2^k chuỗi để tìm ra chuỗi có đối tính phụ âm lớn nhất.
+(3) Vậy ta kết hợp với bit như thế nào?
++ Lấy một ví dụ đơn giản: Ta có chuỗi "abd". Dễ dàng nhận thấy chuỗi này có 1 nguyên âm là 'a' và hai phụ âm là 'b' và 'd', dựa trên lí thuyết ta nói ở trên, chuỗi này có thể sinh ra tối đa 2^2 = 4 chuỗi, tương ứng là: "abd", "aBd", "abD", "aBD". Ta quy đổi sang bit với quy ước bit 0 là in thường và bit 1 là in hoa, lưu ý là chỉ tính bit với các phụ âm, vậy ta sẽ có 00, 10, 01, 11.
++ Bây giờ, vấn đề là nếu duyệt vét cạn với 2^k chuỗi và mỗi lần lại duyệt 10^6 để tính đối tính phụ âm, trong trường hợp đầy đủ 19 phụ âm trong chuỗi, độ phức tạp sẽ là 2^19 * 10^6 ~ 5*10^11. Con số này sẽ khiến chương trình TLE ngay lập tức.
+(4) Làm thế nào để giải quyết TLE?
++ Đối tính phụ âm được quyết định bằng các cặp phụ âm liên tiếp nhau trong xâu. Đây chính là mấu chốt, bí quyết để giải quyết ở bài toán này chính là ta sẽ đếm các cặp phụ âm liên tiếp nhau xuất hiện trong xâu và tần suất của chúng, bởi vì các cặp có thể xuất hiện rất nhiều lần trong xâu, dựa vào điều này, ở mỗi trạng thái bit, ở đây ta sẽ gọi là 1 Mask. Ta sẽ thực hiện tính trạng thái bit của các phụ âm đó trong xâu đang là bao nhiêu. Nếu ở 1 cặp phụ âm, mà 2 bit của 2 phụ âm đó khác nhau, ta thực hiện cộng tần suất của cặp đó vào đối tính phụ âm đang xét tại chính Mask đó. Từ đó, khi duyệt vét cạn qua 2^k Mask, ta sẽ tìm được Mask có đối tính phụ âm lớn nhất, từ Mask trên, ta sẽ biến đổi xâu kí tự s ban đầu theo bit của Mask đó và trả về kết quả. 
+(5) Tại sao nó giải quyết được TLE?
++ Theo xác suất thống kê, ở mỗi cặp phụ âm, mỗi phụ âm có 19 cách chọn (Trong trường hợp xâu kí tự có đủ cả 19 phụ âm). Thì số cặp tối đa trong xâu sẽ được tính là 19*19 = 361 cặp.
++ Lúc này ở trường hợp xấu nhất. Ta sẽ duyệt 2^19 Mask và phải duyệt thêm 361 cặp để tính đối tính phụ âm ở bên trong, tổng thời gian sẽ là 2^19 * 361 ~ 10^8. Thời gian này là vừa đủ để C++ hoàn thành chương trình trong 1 giây. Từ đó giúp chúng ta giải quyết được TLE. Thời gian cũng được cải thiện đáng kể so với 5*10^11.
+(6) Những kiến thức cần biết để hoàn thiện chương trình:
++ Các cú pháp dịch bit để tìm bit của kí tự tại mask đó và tính toán được xâu kết quả.
++ Các kĩ thuật đếm tần suất và lưu chỉ số Index lần xuất hiện đầu tiên của kí tự vào mảng 1 chiều, mảng 2 chiều.
++ Kĩ thuật sử dụng ngôn ngữ lập trình C++.
++ Kĩ năng kiên nhẫn và Fix Bug vì Test Case rất là ác.
+
