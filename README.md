@@ -8,6 +8,9 @@
 
 # 1. GIỚI THIỆU:
 
+![C++](https://img.shields.io/badge/Language-C%2B%2B-00599C?style=flat-square&logo=c%2B%2B&logoColor=white)
+![Python](https://img.shields.io/badge/Language-Python_3.x-3776AB?style=flat-square&logo=python)
+
 - Đây là toàn bộ Source Code của tất cả bài tập mình đã làm khi học Phân Tích & Thiết Kế Thuật Toán. Trong đó, các mã nguồn được viết bằng ngôn ngữ lập trình C++ đều đã ACCEPT 100%, còn đối với ngôn ngữ lập trình Python, do tính chất đặc thù của ngôn ngữ này nên 1 số mã nguồn Python sẽ TLE khi nộp. Nếu muốn xanh và ACCEPT 100 điểm, các bạn nên tham khảo các mã nguồn được viết bằng C++. Nếu muốn có góc nhìn tổng quan hơn, rộng hơn khi so sánh độ phức tạp thời gian của hai ngôn ngữ, cách viết code,... Các bạn có thể xem thêm các mã nguồn được viết bằng Python.
 - Mỗi thư mục sẽ đại diện cho một chiến lược thiết kế thuật toán mà các bạn sẽ được học trong môn học này. Ở mỗi thư mục như vậy sẽ gồm 4 thành phần, bao gồm 2 thư mục mã nguồn đại diện cho C++ và Python, 1 thư mục chứa đề bài của các Problems và 1 thư mục chứa các tài liệu, tài liệu này có thể là tài liệu phân tích chi tiết cách giải các Problems trên hoặc template thiết kế thuật toán.
 
